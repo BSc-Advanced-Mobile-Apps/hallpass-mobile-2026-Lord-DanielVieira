@@ -4,7 +4,7 @@ import { Text } from '@/components/ui/text';
 
 export default function SettingsScreen() {
   return (
-    <View className="bg-background flex-1 items-center justify-center">
+    <View className="bg-background flex-1 items-center justify-center px-4">
       <Text variant="h1" className="font-semibold">
         Settings Screen
       </Text>
