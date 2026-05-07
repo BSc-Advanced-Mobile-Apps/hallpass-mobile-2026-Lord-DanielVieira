@@ -16,12 +16,13 @@ import { Text } from '@/components/ui/text';
 import { ITask } from '@/app';
 
 interface TaskDialogProps {
+  onSave?: (task: ITask) => void;
   task: ITask;
   setTask: (task: ITask) => void;
   setShowDialog: (showDialog: boolean) => void;
   showDialog: boolean;
 }
-function TaskDialogue({ task, setTask, setShowDialog, showDialog }: TaskDialogProps) {
+function TaskDialogue({ onSave, task, setTask, setShowDialog, showDialog }: TaskDialogProps) {
   const [editedTitle, setEditedTitle] = React.useState(task.title);
   const [editedCategory, setEditedCategory] = React.useState(task.category);
 
@@ -40,6 +41,13 @@ function TaskDialogue({ task, setTask, setShowDialog, showDialog }: TaskDialogPr
     };
 
     setTask(nextTask);
+    // If onSave is defined, call it and return early
+    if (onSave) {
+      onSave(nextTask);
+      return;
+    }
+    setEditedTitle('');
+    setEditedCategory('');
     setShowDialog(false);
   };
   return (
@@ -50,28 +58,18 @@ function TaskDialogue({ task, setTask, setShowDialog, showDialog }: TaskDialogPr
       </DialogHeader>
 
       <View className="gap-4">
-        <Input
-          defaultValue={task.title}
-          placeholder="Task title"
-          onChangeText={handleUpdateTitle}
-        />
-        <Input
-          defaultValue={task.category}
-          placeholder="Category"
-          onChangeText={handleUpdateCategory}
-        />
+        <Input value={editedTitle} placeholder="Task title" onChangeText={handleUpdateTitle} />
+        <Input value={editedCategory} placeholder="Category" onChangeText={handleUpdateCategory} />
       </View>
       <DialogFooter className="mt-4 flex flex-row gap-2">
-        <DialogClose className="border-brand-primary w-1/2 border" asChild>
-          <Button variant="outline" className="border-brand-primary rounded-3xl border">
-            <Text className="text-brand-primary">Cancel</Text>
-          </Button>
-        </DialogClose>
-        <DialogClose asChild>
-          <Button className="bg-brand-primary w-1/2 rounded-3xl" onPress={handleSave}>
-            <Text className="text-background">Save changes</Text>
-          </Button>
-        </DialogClose>
+        <Button
+          className="border-brand-primary flex-1 rounded-3xl border bg-transparent"
+          onPress={() => setShowDialog(false)}>
+          <Text className="text-brand-primary">Cancel</Text>
+        </Button>
+        <Button className="bg-brand-primary flex-1w-1/2 rounded-3xl" onPress={handleSave}>
+          <Text>Save changes</Text>
+        </Button>
       </DialogFooter>
     </DialogContent>
   );
