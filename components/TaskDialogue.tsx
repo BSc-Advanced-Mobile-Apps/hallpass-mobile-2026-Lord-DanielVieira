@@ -50,10 +50,17 @@ function TaskDialogue({ task, setTask, setShowDialog, showDialog }: TaskDialogPr
       </DialogHeader>
 
       <View className="gap-4">
-        <Input defaultValue={task.title} placeholder="Task title" />
-        <Input defaultValue={task.category} placeholder="Category" />
+        <Input
+          defaultValue={task.title}
+          placeholder="Task title"
+          onChangeText={handleUpdateTitle}
+        />
+        <Input
+          defaultValue={task.category}
+          placeholder="Category"
+          onChangeText={handleUpdateCategory}
+        />
       </View>
-
       <DialogFooter className="mt-4 flex flex-row gap-2">
         <DialogClose className="border-brand-primary w-1/2 border" asChild>
           <Button variant="outline" className="border-brand-primary rounded-3xl border">
@@ -61,7 +68,7 @@ function TaskDialogue({ task, setTask, setShowDialog, showDialog }: TaskDialogPr
           </Button>
         </DialogClose>
         <DialogClose asChild>
-          <Button className="bg-brand-primary w-1/2 rounded-3xl">
+          <Button className="bg-brand-primary w-1/2 rounded-3xl" onPress={handleSave}>
             <Text className="text-background">Save changes</Text>
           </Button>
         </DialogClose>
