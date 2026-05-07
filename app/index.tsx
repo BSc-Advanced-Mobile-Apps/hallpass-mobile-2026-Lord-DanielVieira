@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Text } from '@/components/ui/text';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Task from '@/components/Task';
 
+// Key for storing tasks in AsyncStorage
+const TASKS_STORAGE_KEY = 'hallpass_tasks';
 export interface ITask {
   title: string;
   category: string;
@@ -20,16 +24,7 @@ export default function HomeScreen() {
 
   return (
     <View className="bg-background flex flex-1">
-      <View className="flex flex-row py-4">
-        <View className="flex w-16 items-center justify-center">
-          <Checkbox checked={checked} onCheckedChange={setChecked} className="border-2" />
-        </View>
-
-        <View className="border-b-foreground-transparent flex-1 border-b py-4">
-          <Text className="text-foreground">submit assignment</Text>
-          <Text className="text-foreground">Due: Oct 20</Text>
-        </View>
-      </View>
+      <Task task={task} />
     </View>
   );
 }
