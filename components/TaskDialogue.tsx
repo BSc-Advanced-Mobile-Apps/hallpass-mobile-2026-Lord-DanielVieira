@@ -46,10 +46,12 @@ function TaskDialogue({ onSave, task, setTask, setShowDialog, showDialog }: Task
       onSave(nextTask);
       return;
     }
+
     setEditedTitle('');
     setEditedCategory('');
     setShowDialog(false);
   };
+
   return (
     <DialogContent className="max-w-5/6">
       <DialogHeader>
@@ -61,6 +63,7 @@ function TaskDialogue({ onSave, task, setTask, setShowDialog, showDialog }: Task
         <Input value={editedTitle} placeholder="Task title" onChangeText={handleUpdateTitle} />
         <Input value={editedCategory} placeholder="Category" onChangeText={handleUpdateCategory} />
       </View>
+
       <DialogFooter className="mt-4 flex flex-row gap-2">
         <Button
           className="border-brand-primary flex-1 rounded-3xl border bg-transparent"
