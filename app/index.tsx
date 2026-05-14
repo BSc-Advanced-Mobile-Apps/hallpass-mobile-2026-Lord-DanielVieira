@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Text } from '@/components/ui/text';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Task from '@/components/Task';
@@ -18,7 +17,6 @@ export interface ITask {
 }
 
 export default function HomeScreen() {
-  const [checked, setChecked] = useState(false);
   const [tasks, setTasks] = React.useState<ITask[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
