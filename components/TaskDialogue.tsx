@@ -17,12 +17,20 @@ import { ITask } from '@/app';
 
 interface TaskDialogProps {
   onSave?: (task: ITask) => void;
+  onUpdate?: (task: ITask) => void;
   task: ITask;
   setTask: (task: ITask) => void;
   setShowDialog: (showDialog: boolean) => void;
   showDialog: boolean;
 }
-function TaskDialogue({ onSave, task, setTask, setShowDialog, showDialog }: TaskDialogProps) {
+function TaskDialogue({
+  onSave,
+  onUpdate,
+  task,
+  setTask,
+  setShowDialog,
+  showDialog,
+}: TaskDialogProps) {
   const [editedTitle, setEditedTitle] = React.useState(task.title);
   const [editedCategory, setEditedCategory] = React.useState(task.category);
 
@@ -46,7 +54,11 @@ function TaskDialogue({ onSave, task, setTask, setShowDialog, showDialog }: Task
       onSave(nextTask);
       return;
     }
-
+    if (onUpdate) {
+      onUpdate(nextTask);
+      setShowDialog(false);
+      return;
+    }
     setEditedTitle('');
     setEditedCategory('');
     setShowDialog(false);

@@ -24,7 +24,7 @@ export default function Task({ task: initialTask, onUpdate }: TaskProps) {
   };
 
   return (
-    <Dialog>
+    <Dialog open={showDialog} onOpenChange={setShowDialog}>
       <DialogTrigger asChild>
         <TouchableOpacity className="flex w-full flex-row" delayLongPress={500}>
           <View className="flex h-full w-24 px-8 py-5">
@@ -47,6 +47,7 @@ export default function Task({ task: initialTask, onUpdate }: TaskProps) {
         setTask={setTask}
         setShowDialog={setShowDialog}
         showDialog={showDialog}
+        onUpdate={onUpdate}
       />
     </Dialog>
   );
